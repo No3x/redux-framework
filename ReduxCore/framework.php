@@ -1257,7 +1257,7 @@
                     );
                 } else {
                     // Network settings and Post type menus. These do not have
-                    // wrappers and need to be appened to using add_submenu_page.
+                    // wrappers and need to be appended to using add_submenu_page.
                     // Okay, since we've left the post type menu appending
                     // as default, we need to validate it, so anything that
                     // isn't post_type=<post_type> doesn't get through and mess
@@ -1284,6 +1284,18 @@
                             // custom menu
                         } elseif ( isset( $submenu[ $this->args['page_parent'] ] ) ) {
                             $addMenu = true;
+                            // Maybe there is an empty top menu as stated in page_parent    
+                        } else {
+                            foreach( $menu as $menupriority => $menuitem ) {
+                                $needle_menu_slug = isset($menuitem) ? $menuitem[2] : false;
+                                if( $needle_menu_slug != false ) {
+                                    // check if the current needle menu equals page_parent
+                                    if( strpos( $needle_menu_slug, $page_parent ) !== false ) {
+                                        // found an empty parent menu
+                                        $addMenu = true;
+                                    }
+                                }
+                            }
                         }
 
                     } else {
