@@ -1231,6 +1231,7 @@
              * @return      void
              */
             private function add_submenu( $page_parent, $page_title, $menu_title, $page_permissions, $page_slug ) {
+                global $menu;
                 global $submenu;
 
                 // Just in case. One never knows.
